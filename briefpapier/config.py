@@ -155,7 +155,7 @@ def config_laden(pfad: str | Path | None = None) -> Config:
                 werte[abschnitt][schluessel] = wert
         quelle = datei
 
-    basis = datei.parent
+    basis = datei.resolve().parent
     bp, ordner, drucker, agent = (
         werte["briefpapier"], werte["ordner"], werte["drucker"], werte["agent"],
     )

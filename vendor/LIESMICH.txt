@@ -1,0 +1,16 @@
+In diesen Ordner gehoeren zwei Fremdprogramme, die mit ausgeliefert werden.
+Sie werden NICHT im Git-Repository gespeichert.
+
+Automatisch herunterladen (PowerShell, im Projektordner):
+    powershell -ExecutionPolicy Bypass -File tools\vendor_laden.ps1
+
+Oder von Hand:
+
+1. mfilemon-setup.exe   (Port-Monitor "Multi File Port Monitor", GPLv3)
+   https://github.com/lomo74/mfilemon/releases   -> mfilemon-setup.exe
+   (NICHT amfilemon-setup.exe - das ist eine Sonderversion fuer TSplus)
+
+2. SumatraPDF-<version>-64.zip   (PDF-Programm zum Drucken, GPLv3)
+   https://www.sumatrapdfreader.org/download-free-pdf-viewer
+   -> "64-bit portable version" (zip), z.B. SumatraPDF-3.6.1-64.zip
+   Eine einzelne SumatraPDF*.exe (portable) funktioniert ebenfalls.

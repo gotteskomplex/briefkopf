@@ -106,7 +106,11 @@ class SpoolUeberwacher:
             elif p.name not in self._fremde_gemeldet:
                 # Nur einmal pro Datei loggen, sonst läuft das Log voll
                 self._fremde_gemeldet.add(p.name)
-                log.debug("Datei eines anderen Benutzers wird ignoriert: %s", p.name)
+                log.info(
+                    "Datei gehört nicht zum Benutzer '%s' und wird ignoriert: %s "
+                    "(falls das der eigene Druck ist: [agent] nur_eigene_auftraege = false)",
+                    self.benutzer, p.name,
+                )
         return eigene
 
     def fertige_dateien(self) -> list[FertigeDatei]:

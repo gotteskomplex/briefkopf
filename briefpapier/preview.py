@@ -27,7 +27,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Callable
 
-from PySide6.QtCore import QPointF, QStandardPaths, Qt, QThread, QTimer, Signal
+from PySide6.QtCore import QEvent, QPointF, QStandardPaths, Qt, QThread, QTimer, Signal
 from PySide6.QtGui import QKeySequence, QShortcut
 from PySide6.QtPdf import QPdfDocument
 from PySide6.QtPdfWidgets import QPdfView
@@ -144,6 +144,7 @@ class VorschauFenster(QWidget):
         self.ansicht.setDocument(self.doc_mit)
         self.ansicht.setStyleSheet("background: #808080;")
         self.ansicht.pageNavigator().currentPageChanged.connect(self._seitenanzeige_aktualisieren)
+        self.ansicht.viewport().installEventFilter(self)  # für Strg + Mausrad
 
         links = QVBoxLayout()
         links.addLayout(leiste)
@@ -287,6 +288,14 @@ class VorschauFenster(QWidget):
                 aktuell = self.ansicht.viewport().width() / (breite_pt * self.logicalDpiX() / 72)
         self.ansicht.setZoomMode(QPdfView.ZoomMode.Custom)
         self.ansicht.setZoomFactor(max(0.1, min(8.0, aktuell * faktor)))
+
+    def eventFilter(self, objekt, ereignis) -> bool:
+        """Strg + Mausrad zoomt (wie in Browsern und PDF-Programmen üblich)."""
+        if (ereignis.type() == QEvent.Type.Wheel
+                and ereignis.modifiers() & Qt.KeyboardModifier.ControlModifier):
+            self._zoom(1.15 if ereignis.angleDelta().y() > 0 else 1 / 1.15)
+            return True
+        return super().eventFilter(objekt, ereignis)
 
     def _zoom_breite(self):
         self.ansicht.setZoomMode(QPdfView.ZoomMode.FitToWidth)

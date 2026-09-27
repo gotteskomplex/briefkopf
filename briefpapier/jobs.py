@@ -73,6 +73,10 @@ class ArbeitsOrdner:
         except PermissionError as e:
             log.debug("%s noch gesperrt: %s", quelle.name, e)
             return None
+        except OSError:
+            # z.B. Spool- und Arbeitsordner auf verschiedenen Laufwerken:
+            # dann kopieren und Original löschen
+            shutil.move(str(quelle), str(ziel))
         log.info("Auftrag übernommen: %s", ziel)
         return ziel
 

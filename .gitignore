@@ -9,3 +9,8 @@ venv/
 !/vendor/LIESMICH.txt
 *.log
 .pytest_cache/
+/build/briefpapier.ico
+/Briefpapier-*.zip
+# Kunden-Briefpapier nicht ins Repository
+/briefpapier.pdf
+/SumatraPDF/
