@@ -1,0 +1,80 @@
+# ============================================================================
+#  Briefpapier – Konfiguration
+#  Liegt auf den Arbeitsplätzen unter  C:\ProgramData\Briefpapier\config.toml
+#
+#  WICHTIG: Windows-Pfade in EINFACHE Anführungszeichen setzen:
+#      richtig:  erste_seite = 'C:\ProgramData\Briefpapier\briefpapier.pdf'
+#      falsch:   erste_seite = "C:\ProgramData\Briefpapier\briefpapier.pdf"
+#  (In doppelten Anführungszeichen wird der Backslash als Sonderzeichen gelesen.)
+#
+#  Relative Pfade gelten relativ zum Ordner dieser Datei.
+#  Umgebungsvariablen sind erlaubt, z.B. '%USERPROFILE%\Briefpapier'.
+#  Nicht angegebene Einträge verwenden den Standardwert (hier jeweils gezeigt).
+#
+#  Nach einer Änderung: Agent neu starten (abmelden/anmelden oder über das
+#  Tray-Icon "Beenden" und Briefpapier.exe erneut starten).
+# ============================================================================
+
+[briefpapier]
+# PDF mit dem Briefpapier für Seite 1 (es wird die erste Seite dieser PDF verwendet)
+erste_seite = 'briefpapier.pdf'
+
+# Anderes Briefpapier für die Folgeseiten (Seite 2 ff.).
+# Leer lassen = gleiches Briefpapier wie Seite 1 auf allen Seiten.
+folgeseiten = ''
+
+# Was passiert mit Seiten, die NICHT A4-Hochformat sind (Querformat, Letter, A5 …)?
+#   'weglassen' = diese Seiten ohne Briefpapier (Hinweis im Vorschaufenster)
+#   'anpassen'  = Briefpapier proportional auf die Seite verkleinern
+nicht_a4 = 'weglassen'
+
+# Erlaubte Abweichung von A4 in Millimetern
+toleranz_mm = 3.0
+
+# Lage des Briefpapiers:
+#   'unterlage'      = hinter dem Text, wie echtes Briefpapier (Normalfall)
+#   'ueberlagerung'  = über dem Text, im Modus "Multiplizieren" – nur nötig,
+#                      falls ein Programm beim Drucken einen weißen Hintergrund
+#                      mitschickt und das Briefpapier deshalb unsichtbar bleibt
+lage = 'unterlage'
+
+[ordner]
+# Hier legt der Drucker "Briefpapier" die Druckaufträge ab (muss zum Drucker-Port passen!)
+spool = 'C:\ProgramData\Briefpapier\spool'
+# Arbeitsordner (je Benutzer ein Unterordner mit in_arbeit, erledigt, fehler, temp)
+arbeit = 'C:\ProgramData\Briefpapier\arbeit'
+# Protokolldateien (je Benutzer eine Datei briefpapier_<benutzer>.log)
+log = 'C:\ProgramData\Briefpapier\logs'
+
+[drucker]
+# Name des virtuellen Druckers – wird in der Druckerauswahl ausgeblendet
+virtueller_drucker = 'Briefpapier'
+
+# Weitere Drucker, die NICHT zur Auswahl stehen sollen, z.B.
+#   ausblenden = ['Fax', 'OneNote (Desktop)', 'Microsoft XPS Document Writer']
+ausblenden = []
+
+# Pfad zu SumatraPDF.exe. Leer = SumatraPDF\SumatraPDF.exe im Programmordner
+sumatra = ''
+
+# Druckgröße: 'noscale' = Originalgröße (empfohlen, Briefpapier sitzt exakt),
+#             'shrink'  = nur verkleinern, falls nötig, 'fit' = an Papier anpassen
+skalierung = 'noscale'
+
+# Nach wie vielen Sekunden ein hängender Druck als Fehler gemeldet wird
+druck_timeout_sekunden = 120
+
+[agent]
+# Nur eigene Druckaufträge verarbeiten (Dateiname beginnt mit dem Benutzernamen).
+# Sollte immer true bleiben.
+nur_eigene_auftraege = true
+
+# Wie viele Tage erledigte Aufträge (Originaldateien) aufbewahrt werden,
+# z.B. falls jemand versehentlich "Abbrechen" geklickt hat. 0 = sofort löschen.
+aufbewahren_tage = 7
+
+# Darf der Benutzer den Agent über das Tray-Icon beenden?
+beenden_erlauben = true
+
+# Ausführlichkeit des Protokolls: 'INFO' (normal) oder 'DEBUG' (für Fehlersuche)
+log_stufe = 'INFO'

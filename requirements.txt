@@ -1,0 +1,3 @@
+# Laufzeit
+PySide6>=6.7,<7        # Oberfläche + PDF-Vorschau (QtPdf); LGPL
+pikepdf>=9,<11         # PDF-Bearbeitung (basiert auf qpdf); MPL-2.0

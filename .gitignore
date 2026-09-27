@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+/dist/
+/build/_pyinstaller/
+/paket/
+/vendor/*
+!/vendor/LIESMICH.txt
+*.log
+.pytest_cache/
